@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阡谷室內空間設計 CHIAN GU INTERIOR DESIGN STUDIO</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS (Animate On Scroll) 動畫套件 -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- 自訂CSS -->
+  <style>
+    /* 卡片 hover 動畫 */
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    /* Hero 區塊背景漸層 */
+    #home {
+      background: linear-gradient(135deg, #DCB1A1 30%, #FFDBD8 100%);
+      color: white;
+    }
+
+    /* 返回頂部按鈕樣式 */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      background-color: #DCB1A1;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    #backToTop:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 提示訊息 -->
+  <div class="alert alert-primary text-center mb-0" role="alert">
+    🌟 歡迎來到阡谷室內設計作品集展示網站
+  </div>
+
+  <!-- 導航列 -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">阡 谷 室 內 設 計</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="#home">首頁</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">關於</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">作品</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">聯絡</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero 區塊 -->
+  <section id="home" class="py-5 text-center">
+    <div class="container" data-aos="fade-up">
+      <h1 class="display-4 fw-bold">您好 !</h1>
+      <p class="lead">歡迎來到阡谷室內設計作品集展示空間</p>
+      <div class="mt-4">
+        <a href="#portfolio" class="btn btn-light btn-lg me-2">查看作品</a>
+        <a href="#contact" class="btn btn-outline-light btn-lg">聯絡我</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 關於我 -->
+  <section id="about" class="py-5 bg-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center mb-3">
+        <img src="阡谷室內設計 視覺圖.jpg" 
+       alt="我的照片" 
+       class="img-fluid rounded-circle shadow"
+       style="width:250px; height:250px; object-fit:cover;">
+        </div>
+        <div class="col-md-8" data-aos="fade-left">
+          <h2 class="fw-bold mb-3">關於阡谷室內設計</h2>
+          <p class="fs-5 text-secondary">專營室內空間規劃設計</p>
+          <p class="text-muted">以系統櫃搭配木工裝潢出您理想的風格</p>
+          <p class="fw-light text-dark">適當溝通並配合需求，完成您心目中最完美的家</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能展示 -->
+  <section id="skills" class="py-5 bg-light text-center">
+    <div class="container">
+      <h2 class="fw-bold mb-5" data-aos="fade-up">技能展示</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4" data-aos="zoom-in">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <i class="bi bi-laptop display-5 skill-icon"></i>
+              <style>
+                .skill-icon {
+                color: #A97158
+                }
+                </style>
+              <h5 class="card-title mt-3">設計軟體 </h5>
+              <p class="card-text text-muted">精通sketchup、autocad、渲染軟體等使用</p>
+              <div class="progress" style="height: 10px;">
+                <div class="progress-bar" style="width: 85%; background-color:#A97158;"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <i class="bi bi-hammer display-5 skill-icon"></i>
+              <style>
+                .skill-icon {
+                color: #A97158
+                }
+                </style>
+              <h5 class="card-title mt-3">施工知識</h5>
+              <p class="card-text text-muted">各種漆料的應用，認知各種木工及系統家具的設計與應用，最後軟裝設計的豐富經驗</p>
+              <div class="progress" style="height: 10px;">
+                <div class="progress-bar" style="width: 70%; background-color:#A97158;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <i class="bi bi-box-seam display-5 skill-icon"></i>
+              <style>
+                .skill-icon {
+                color: #A97158
+                }
+                </style>
+              <h5 class="card-title mt-3">材質應用</h5>
+              <p class="card-text text-muted">認知各種材料的強度及特性，以及適合用的地方、位置</p>
+              <div class="progress" style="height: 10px;">
+                <div class="progress-bar" style="width: 50%; background-color:#A97158;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品集 -->
+  <section id="portfolio" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-4">作品集</h2>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="作品集1.jpg" alt="作品1" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="作品集2.jpg" alt="作品2" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <img src="作品集3.jpg" alt="作品3" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 聯絡表單 -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container" data-aos="fade-up">
+      <h2 class="fw-bold text-center mb-5">聯絡我</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">姓名</label>
+              <input type="text" class="form-control" id="name" placeholder="請輸入姓名">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label">主旨</label>
+              <input type="text" class="form-control" id="subject" placeholder="請輸入主旨">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">訊息</label>
+              <textarea class="form-control" id="message" rows="4" placeholder="請輸入訊息內容"></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn submit-btn">送出</button>
+
+                <style>
+                .submit-btn {
+                    background-color: #DAB1A0;
+                    color: white;       /* 文字顏色 */
+                    border: none;       /* 去掉邊框 */
+                }
+                .submit-btn:hover {
+                    background-color: #A97158; /* 滑鼠懸停變色 */
+                }
+                </style>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer class="bg-dark text-white text-center py-4">
+    <div class="mb-3">
+      <a href="https://www.facebook.com/qoo3020?locale=zh_TW" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+      <a href="https://www.instagram.com/chian_gu_design_studio/" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+      <a href="mailto:qoo3020@gmail.com" class="text-white me-3">
+  <i class="bi bi-envelope-fill" style="font-size:1.5rem;"></i>
+      </a>
+
+    </div>
+    <p class="mb-0">&copy; 2025 阡谷室內空間設計 | CHIAN GU INTERIOR DESIGN STUDIO</p>
+  </footer>
+
+  <!-- 返回頂部按鈕 -->
+  <button id="backToTop"><i class="bi bi-arrow-up"></i></button>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- AOS 動畫 -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    // 返回頂部按鈕控制
+    const btn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "flex";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+    btn.onclick = function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>
+</body>
+</html>
