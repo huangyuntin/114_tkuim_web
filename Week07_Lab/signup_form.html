@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week07 Lab - 會員註冊表單</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="container">
+        <h1>建立您的帳號</h1>
+        <p>完成以下步驟，立即開始！</p>
+
+        <div id="successMessage" class="success-message" hidden>
+            <h3>🎉 註冊成功！</h3>
+            <p>感謝您的註冊，我們已將確認信寄至您的信箱。</p>
+        </div>
+
+        <form id="signupForm" novalidate>
+            
+            <div class="form-group">
+                <label for="username">姓名</label>
+                <input type="text" id="username" name="username" required aria-describedby="username-error">
+                <p id="username-error" class="error-message" aria-live="polite"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required aria-describedby="email-error">
+                <p id="email-error" class="error-message" aria-live="polite"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">手機 (10 碼)</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" aria-describedby="phone-error">
+                <p id="phone-error" class="error-message" aria-live="polite"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="password">密碼 (至少 8 碼，英數混合)</label>
+                <input type="password" id="password" name="password" required minlength="8" aria-describedby="password-error password-strength">
+                <p id="password-error" class="error-message" aria-live="polite"></p>
+                <div id="password-strength" class="password-strength-meter">
+                    <div class="strength-bar" id="strengthBar"></div>
+                    <span id="strengthText"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">確認密碼</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required aria-describedby="confirmPassword-error">
+                <p id="confirmPassword-error" class="error-message" aria-live="polite"></p>
+            </div>
+
+            <div class="form-group">
+                <fieldset id="interestGroup" aria-describedby="interests-error">
+                    <legend>興趣標籤 (至少 1 項)</legend>
+                    <div id="interestTags" class="interest-tags-container">
+                        <input type="checkbox" id="tech" name="interests" value="tech">
+                        <label for="tech" class="tag-label">科技</label>
+                        
+                        <input type="checkbox" id="sports" name="interests" value="sports">
+                        <label for="sports" class="tag-label">運動</label>
+                        
+                        <input type="checkbox" id="music" name="interests" value="music">
+                        <label for="music" class="tag-label">音樂</label>
+                        
+                        <input type="checkbox" id="travel" name="interests" value="travel">
+                        <label for="travel" class="tag-label">旅遊</label>
+                        
+                        <input type="checkbox" id="food" name="interests" value="food">
+                        <label for="food" class="tag-label">美食</label>
+                    </div>
+                    <p id="interests-error" class="error-message" aria-live="polite"></p>
+                </fieldset>
+            </div>
+
+            <div class="form-group form-group-checkbox">
+                <input type="checkbox" id="terms" name="terms" required aria-describedby="terms-error">
+                <label for="terms">我已閱讀並同意 <a href="#" target="_blank">服務條款</a></label>
+                <p id="terms-error" class="error-message" aria-live="polite"></p>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="submitBtn">
+                    <span class="btn-text">立即註冊</span>
+                    <span class="btn-loader" hidden>傳送中...</span>
+                </button>
+                <button type="button" id="resetBtn">重設</button>
+            </div>
+
+        </form>
+    </main>
+
+    <script src="signup_form.js" defer></script>
+</body>
+</html>
