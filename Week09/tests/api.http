@@ -1,0 +1,26 @@
+### 測試 GET 報名清單
+GET http://localhost:3001/api/signup
+
+### 正常 POST
+POST http://localhost:3001/api/signup
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "email": "test@example.com",
+  "phone": "0911000111",
+  "password": "1234",
+  "confirmPassword": "1234"
+}
+
+### 錯誤 POST（密碼不一致）
+POST http://localhost:3001/api/signup
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "email": "test@example.com",
+  "phone": "0911000111",
+  "password": "1234",
+  "confirmPassword": "9999"
+}

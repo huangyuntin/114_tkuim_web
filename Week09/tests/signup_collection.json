@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "e02a2c4d-905c-4c49-a2f6-a36451995cfe",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50261626",
+		"_collection_link": "https://tsen0905-3942297.postman.co/workspace/tsen's-Workspace~e148b409-af2d-466a-85a7-9be77d54c0fb/collection/50261626-e02a2c4d-905c-4c49-a2f6-a36451995cfe?action=share&source=collection_link&creator=50261626"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"test_user\",\n  \"email\": \"test@gmail.com\",\n  \"phone\": \"0912345678\",\n  \"password\": \"abc12345\",\n  \"confirmPassword\": \"abc12345\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
