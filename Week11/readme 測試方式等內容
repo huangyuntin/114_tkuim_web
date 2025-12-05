@@ -1,0 +1,53 @@
+專案名稱 / 目的
+
+實作報名系統 API（含 Mongo + docker），提供 POST/GET/PATCH/DELETE 與分頁、email 唯一索引與友善重複回應，並附上前端表單與測試範例。
+
+環境需求
+
+Docker & Docker Compose
+
+Node.js >= 16
+
+npm
+
+Optional: VSCode + REST Client 外掛 或 Postman
+
+MongoDB Compass（若要看 GUI）
+
+快速啟動
+
+複製 .env.example → server/.env 並填入資料（或根目錄設定 env）
+
+MONGO_ROOT_USERNAME：Mongo root user（docker-compose 會用到）
+
+MONGO_ROOT_PASSWORD：Mongo root password
+
+MONGO_DATABASE：預設 DB 名稱
+
+PORT：server port（預設 3001）
+
+啟動 Mongo（於專案根目錄執行）：
+
+docker compose up -d
+
+
+驗證 docker 容器：
+
+docker ps
+
+
+安裝 server 相依套件並啟動：
+
+cd server
+npm install
+npm run dev 
+
+
+開啟前端：
+
+直接在瀏覽器開啟 client/signup_form.html（或用 Live Server）並提交表單。
+
+如何測試（提供多種方式）
+A) 使用 VSCode REST Client
+
+打開 api.http 並點選各請求執行(send request) 並出現回應
