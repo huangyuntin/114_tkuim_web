@@ -1,0 +1,33 @@
+### 1. 註冊學生帳號
+POST http://localhost:3001/auth/signup
+Content-Type: application/json
+
+{
+  "email": "student@test.com",
+  "password": "123456",
+  "role": "student"
+}
+
+### 2. 註冊管理員帳號
+POST http://localhost:3001/auth/signup
+Content-Type: application/json
+
+{
+  "email": "admin@test.com",
+  "password": "admin123",
+  "role": "admin"
+}
+
+### 3. 註冊學生 B
+POST http://localhost:3001/auth/signup
+Content-Type: application/json
+
+{
+  "email": "b@test.com",
+  "password": "123456",
+  "role": "student"
+}
+
+### 4. 駭客攻擊：B 想刪除 A 的資料
+DELETE http://localhost:3001/api/signup/6581xxxxxxxxx
+Authorization: Bearer eyJzdWIiOiI2OTVZzWjV5ppx1q3iFaz9WdvULDhUzs118SPlbWFpbCI6ImJAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTVZzWjV5ppx1q3iFaz9WdvULDhUzs118SPwfQ
