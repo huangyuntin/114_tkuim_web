@@ -31,7 +31,7 @@ const ProductCard = ({ id, image, name, price, category, onDelete }) => {
       {/* 內容區域 */}
       <div className="p-4">
         <h3 className="text-lg font-medium text-text-main mb-1 truncate">{name}</h3>
-        <p className="text-rimuru-dark font-bold text-xl">NT$ {price}</p>
+        <p className="text-gray-700 font-bold text-lg">NT$ {price}</p>
         
         <button className="w-full mt-3 py-2 rounded-lg bg-rimuru-light text-rimuru-dark font-medium hover:bg-rimuru hover:text-white transition-colors">
           查看詳情

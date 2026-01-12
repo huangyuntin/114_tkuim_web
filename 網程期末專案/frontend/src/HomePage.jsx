@@ -58,6 +58,31 @@ const HomePage = () => {
     }
   };
 
+// ⭐【新增區塊 1】資料分組邏輯 (放在 return 之前)
+  // 利用 reduce 方法，將原本平坦的陣列，轉換成以類別為 Key 的物件
+  // 例如: { "上衣": [商品A, 商品B], "褲子": [商品C] }
+  const groupedProducts = products.reduce((groups, product) => {
+    const category = product.category || '其他'; // 如果沒有類別就歸類到「其他」
+    if (!groups[category]) {
+      groups[category] = [];
+    }
+    groups[category].push(product);
+    return groups;
+  }, {});
+
+  // ⭐【新增區塊 2】定義類別顯示順序 (選用)
+  // 如果你不介意順序，可以跳過這段，直接用 Object.entries(groupedProducts) 渲染
+  // 如果想固定順序，可以這樣寫：
+  const categoryOrder = ['上衣', '下身'];
+  // 過濾出目前有商品的類別，並依照順序排列
+  const sortedCategories = categoryOrder.filter(cat => groupedProducts[cat]);
+  // 把不在我們定義順序中的類別 (例如新加的類別) 放到最後面
+  Object.keys(groupedProducts).forEach(cat => {
+    if (!categoryOrder.includes(cat)) {
+      sortedCategories.push(cat);
+    }
+  });
+
   return (
     <div className="min-h-screen bg-soft-white font-sans">
       {/* 導覽列 */}
@@ -65,13 +90,12 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0 flex items-center gap-2">
-              <div className="w-8 h-8 bg-rimuru rounded-full flex items-center justify-center text-white font-bold">S</div>
+              <img src="/小白.jfif" alt="Logo" className="w-8 h-8 rounded-full object-cover" />
               <h1 className="text-2xl font-bold text-text-main tracking-wide">
-                SHKEV <span className="text-rimuru text-sm font-normal">衣櫥</span>
+                SHIRO's <span className="text-rimuru text-sm font-normal">SHOP 倉庫管理</span>
               </h1>
             </div>
             <div className="flex gap-4">
-              <button className="text-text-light hover:text-rimuru-dark transition-colors">所有商品</button>
               <button onClick={() => navigate('/add')} className="bg-rimuru text-white px-4 py-1.5 rounded-full hover:bg-rimuru-dark transition-colors shadow-md shadow-rimuru/30">
                 新增商品
               </button>
@@ -83,9 +107,8 @@ const HomePage = () => {
       {/* 主體內容 */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-text-main mb-2">本季精選</h2>
+          <h2 className="text-3xl font-bold text-text-main mb-2">全品項商品</h2>
           <div className="w-16 h-1 bg-rimuru mx-auto rounded-full"></div>
-          <p className="text-text-light mt-3">簡約舒適，穿出你的日常質感</p>
         </div>
 
         {/* 狀態顯示區域 */}
@@ -97,28 +120,35 @@ const HomePage = () => {
           <p className="text-center text-red-500">發生錯誤: {error} <br/> 請確認後端 Server (Port 5000) 是否有開啟</p>
         )}
 
-        {/* 如果沒錯誤且沒載入中，但資料庫是空的 */}
-        {!loading && !error && products.length === 0 && (
-          <div className="text-center text-gray-500 py-10">
-            <p className="text-xl">目前架上沒有商品</p>
-            <p className="text-sm mt-2">請透過 API 或後台新增商品資料</p>
-          </div>
-        )}
+        {/* ⭐【修改區塊 3】原本的單一 Grid 替換成下面這樣 */}
+        {/* 遍歷排序好的類別，一個類別產生一個區塊 */}
+        {!loading && !error && sortedCategories.map((categoryName) => (
+          <div key={categoryName} className="mb-12"> {/* 每個類別區塊底部留白 */}
+            
+            {/* 類別標題 */}
+            <div className="flex items-center mb-6">
+               <h3 className="text-2xl font-bold text-text-main px-2 border-l-4 border-rimuru">
+                 {categoryName}專區
+               </h3>
+               <div className="h-px bg-gray-200 flex-grow ml-4"></div> {/* 裝飾用的分隔線 */}
+            </div>
 
         {/* 商品網格 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {groupedProducts[categoryName].map((product) => (
             <ProductCard 
               key={product._id} // MongoDB 的 id 欄位是 _id
               id={product._id}
               image={product.imageUrl} // 我們資料庫欄位叫 imageUrl
               name={product.name}
               price={product.price}
-              category={product.category}
+              //category={product.category}
               onDelete={handleDelete}
             />
-          ))}
-        </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </main>
     </div>
   );

@@ -60,7 +60,7 @@ const AddProductPage = () => {
               value={formData.name}
               onChange={handleChange}
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-rimuru"
-              placeholder="例如：親膚條紋水貂毛毛衣"
+              placeholder="請輸入商品名稱"
             />
           </div>
 
@@ -87,10 +87,7 @@ const AddProductPage = () => {
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-rimuru"
               >
                 <option value="上衣">上衣</option>
-                <option value="褲子">褲子</option>
-                <option value="裙子">裙子</option>
-                <option value="外套">外套</option>
-                <option value="配件">配件</option>
+                <option value="下身">下身</option>
               </select>
             </div>
           </div>

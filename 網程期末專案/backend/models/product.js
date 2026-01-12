@@ -26,8 +26,7 @@ const productSchema = new mongoose.Schema({
   // 5. 類別 (例如：上衣、裙子)
   category: {
     type: String,
-    required: [true, '請選擇商品類別'],
-    enum: ['上衣', '褲子', '裙子', '外套', '配件', '其他'] // (選填) 可以限制只能輸入這些類別
+    required: [true, '請選擇商品類別']
   },
   // 6. 庫存狀態 (預設 true)
   inStock: {
