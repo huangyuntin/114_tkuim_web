@@ -92,9 +92,17 @@ const ProductCard = ({ id, image, name, price, category, quantity: initialQuanti
           </button>
 
           {/* 中間顯示文字 */}
-          <span className="font-bold text-text-main text-lg">
-            庫存 : {quantity}
-          </span>
+          <div className="flex flex-col items-center">
+  <span className={`font-bold text-lg ${quantity < 5 ? 'text-red-600' : 'text-text-main'}`}>
+    庫存: {quantity}
+  </span>
+  {/* 如果小於 5，多顯示一個警示標籤 */}
+  {quantity < 5 && (
+    <span className="text-xs text-red-500 bg-red-100 px-2 py-0.5 rounded-full mt-1">
+      即將缺貨
+    </span>
+  )}
+</div>
 
           <button 
             onClick={handleIncrease}
