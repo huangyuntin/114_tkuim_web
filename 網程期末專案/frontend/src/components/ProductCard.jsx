@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ProductCard = ({ id, image, name, price, category, onDelete }) => {
+    const [quantity, setQuantity] = useState(1);
+
+  // 定義一個小函式：避免數量變成負數
+  const handleDecrease = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-rimuru-light/50 relative">
       
@@ -33,9 +41,31 @@ const ProductCard = ({ id, image, name, price, category, onDelete }) => {
         <h3 className="text-lg font-medium text-text-main mb-1 truncate">{name}</h3>
         <p className="text-gray-700 font-bold text-lg">NT$ {price}</p>
         
-        <button className="w-full mt-3 py-2 rounded-lg bg-rimuru-light text-rimuru-dark font-medium hover:bg-rimuru hover:text-white transition-colors">
-          查看詳情
-        </button>
+        {/* ⭐【新增 2】把原本的「查看詳情」按鈕刪掉，換成下面這個「計數器」 */}
+        <div className="flex items-center justify-between w-full mt-4 bg-rimuru-light/30 rounded-full p-1 border border-rimuru-light">
+          
+          {/* 減號按鈕 (-) */}
+          <button 
+            onClick={handleDecrease}
+            className="w-8 h-8 flex items-center justify-center bg-white rounded-full text-gray-700 shadow-sm hover:bg-rimuru hover:text-white transition-all font-bold text-xl"
+          >
+            -
+          </button>
+
+          {/* 中間顯示文字 */}
+          <span className="font-bold text-text-main text-lg">
+            庫存 : {quantity}
+          </span>
+
+          {/* 加號按鈕 (+) */}
+          <button 
+            onClick={() => setQuantity(quantity + 1)}
+            className="w-8 h-8 flex items-center justify-center bg-white rounded-full text-gray-700 shadow-sm hover:bg-rimuru hover:text-white transition-all font-bold text-xl"
+          >
+            +
+          </button>
+
+        </div>
       </div>
     </div>
   );
