@@ -33,6 +33,31 @@ const HomePage = () => {
     fetchProducts();
   }, []); // 空陣列代表只在網頁剛載入時執行一次
 
+// ⭐【新增】刪除功能的函式
+  const handleDelete = async (id) => {
+    // 1. 跳出確認視窗，避免誤刪
+    const confirmDelete = window.confirm("確定要刪除這件商品嗎？");
+    if (!confirmDelete) return;
+
+    try {
+      // 2. 發送 DELETE 請求給後端
+      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // 3. 如果後端刪除成功，前端也要把這筆資料從狀態中移除 (這樣不用重整網頁也會消失)
+        setProducts(products.filter(product => product._id !== id));
+        alert("商品已刪除！");
+      } else {
+        alert("刪除失敗，請稍後再試");
+      }
+    } catch (err) {
+      console.error("刪除錯誤:", err);
+      alert("無法連線到伺服器");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-soft-white font-sans">
       {/* 導覽列 */}
@@ -85,10 +110,12 @@ const HomePage = () => {
           {products.map((product) => (
             <ProductCard 
               key={product._id} // MongoDB 的 id 欄位是 _id
+              id={product._id}
               image={product.imageUrl} // 我們資料庫欄位叫 imageUrl
               name={product.name}
               price={product.price}
               category={product.category}
+              onDelete={handleDelete}
             />
           ))}
         </div>
