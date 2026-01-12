@@ -28,6 +28,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, '請選擇商品類別']
   },
+  quantity: { 
+    type: Number, 
+    default: 1 
+ },
   // 6. 庫存狀態 (預設 true)
   inStock: {
     type: Boolean,

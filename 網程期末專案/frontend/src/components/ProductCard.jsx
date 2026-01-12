@@ -1,14 +1,52 @@
 import React, { useState } from 'react';
 
-const ProductCard = ({ id, image, name, price, category, onDelete }) => {
-    const [quantity, setQuantity] = useState(1);
+const ProductCard = ({ id, image, name, price, category, quantity: initialQuantity, onDelete }) => {
+    // 把 1 改成 initialQuantity || 1
+// 意思就是：「如果有從後端拿到資料庫的數字，就用那個數字；如果沒有，才用 1」
+    const [quantity, setQuantity] = useState(initialQuantity || 1);
+    const [isUpdating, setIsUpdating] = useState(false);
 
-  // 定義一個小函式：避免數量變成負數
-  const handleDecrease = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
+ // ⭐【新增】這是一個負責跟後端溝通的函式
+  const updateQuantityOnServer = async (newQty) => {
+    // 1. 先在畫面上更新 (讓使用者覺得很快)
+    setQuantity(newQty);
+    setIsUpdating(true);
+
+    try {
+      // 2. 偷偷在背景告訴後端存檔
+      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity: newQty }),
+      });
+
+      if (!response.ok) {
+        throw new Error('更新失敗');
+      }
+      console.log("庫存已儲存:", newQty);
+    } catch (error) {
+      console.error("更新錯誤:", error);
+      alert("連線失敗，庫存沒存進去喔！");
+      // 如果失敗，也可以考慮把數字改回來，但這裡先簡單處理
+    } finally {
+      setIsUpdating(false);
     }
   };
+
+  const handleDecrease = () => {
+    if (quantity > 0 && !isUpdating) {
+      updateQuantityOnServer(quantity - 1);
+    }
+  };
+
+  const handleIncrease = () => {
+    if (!isUpdating) {
+      updateQuantityOnServer(quantity + 1);
+    }
+  };
+
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-rimuru-light/50 relative">
       
@@ -47,6 +85,7 @@ const ProductCard = ({ id, image, name, price, category, onDelete }) => {
           {/* 減號按鈕 (-) */}
           <button 
             onClick={handleDecrease}
+            disabled={isUpdating}
             className="w-8 h-8 flex items-center justify-center bg-white rounded-full text-gray-700 shadow-sm hover:bg-rimuru hover:text-white transition-all font-bold text-xl"
           >
             -
@@ -57,9 +96,9 @@ const ProductCard = ({ id, image, name, price, category, onDelete }) => {
             庫存 : {quantity}
           </span>
 
-          {/* 加號按鈕 (+) */}
           <button 
-            onClick={() => setQuantity(quantity + 1)}
+            onClick={handleIncrease}
+            disabled={isUpdating}
             className="w-8 h-8 flex items-center justify-center bg-white rounded-full text-gray-700 shadow-sm hover:bg-rimuru hover:text-white transition-all font-bold text-xl"
           >
             +
