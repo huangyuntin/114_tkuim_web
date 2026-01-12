@@ -8,6 +8,7 @@ const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // 2. 使用 useEffect：網頁一打開就執行這裡面的程式
   useEffect(() => {
@@ -58,11 +59,16 @@ const HomePage = () => {
     }
   };
 
-// ⭐【新增區塊 1】資料分組邏輯 (放在 return 之前)
-  // 利用 reduce 方法，將原本平坦的陣列，轉換成以類別為 Key 的物件
-  // 例如: { "上衣": [商品A, 商品B], "褲子": [商品C] }
-  const groupedProducts = products.reduce((groups, product) => {
-    const category = product.category || '其他'; // 如果沒有類別就歸類到「其他」
+// ⭐【新增 1】篩選邏輯：如果搜尋框有字，就只保留符合的商品
+  // 如果搜尋框是空的，filteredProducts 就會等於全部商品
+  const filteredProducts = products.filter(product => 
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    product.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // ⭐【修改 2】分組邏輯：注意！這裡的來源要改成 filteredProducts (原本是 products)
+  const groupedProducts = filteredProducts.reduce((groups, product) => {
+    const category = product.category || '其他';
     if (!groups[category]) {
       groups[category] = [];
     }
@@ -82,6 +88,17 @@ const HomePage = () => {
       sortedCategories.push(cat);
     }
   });
+
+// ... (在 return 之前加入這段)
+  
+  // 計算總商品種類
+  const totalItems = products.length;
+
+  // 計算總庫存數量 (把每件商品的 quantity 加總)
+  const totalStock = products.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+  // 計算總資產價值 (單價 * 數量 的總和)
+  const totalValue = products.reduce((sum, item) => sum + (item.price * (item.quantity || 0)), 0);
 
   return (
     <div className="min-h-screen bg-soft-white font-sans">
@@ -107,9 +124,51 @@ const HomePage = () => {
       {/* 主體內容 */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <div className="mb-8 text-center">
+
           <h2 className="text-3xl font-bold text-text-main mb-2">全品項商品</h2>
-          <div className="w-16 h-1 bg-rimuru mx-auto rounded-full"></div>
+          <div className="w-16 h-1 bg-rimuru mx-auto rounded-full mb-8"></div>
         </div>
+
+{/* ⭐【新增】搜尋框區域 */}
+          <div className="max-w-md mx-auto relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              {/* 放大鏡 Icon */}
+              <svg className="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="搜尋商品名稱或類別..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:border-rimuru focus:ring-1 focus:ring-rimuru sm:text-sm shadow-sm transition-all"
+            />
+          </div>
+
+        {/* 📊 統計儀表板區塊 */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+  {/* 卡片 1: 總商品數 */}
+  <div className="bg-white p-6 rounded-2xl shadow-sm border border-rimuru-light/50 flex flex-col items-center">
+    <h4 className="text-gray-500 font-medium mb-2">總商品種類</h4>
+    <p className="text-4xl font-bold text-text-main">{totalItems} <span className="text-base font-normal text-gray-400">款</span></p>
+  </div>
+
+  {/* 卡片 2: 總庫存量 */}
+  <div className="bg-white p-6 rounded-2xl shadow-sm border border-rimuru-light/50 flex flex-col items-center">
+    <h4 className="text-gray-500 font-medium mb-2">倉庫總庫存</h4>
+    <p className="text-4xl font-bold text-rimuru">{totalStock} <span className="text-base font-normal text-gray-400">件</span></p>
+  </div>
+
+  {/* 卡片 3: 庫存總市值 */}
+  <div className="bg-white p-6 rounded-2xl shadow-sm border border-rimuru-light/50 flex flex-col items-center">
+    <h4 className="text-gray-500 font-medium mb-2">庫存總價值</h4>
+    <p className="text-4xl font-bold text-rimuru-dark">
+      <span className="text-2xl mr-1">NT$</span>
+      {totalValue.toLocaleString()} {/* toLocaleString 會幫你加上千分位逗號 */}
+    </p>
+  </div>
+</div>
 
         {/* 狀態顯示區域 */}
         {loading && (
